@@ -7,20 +7,33 @@
     Last Name: <input v-model="lastName" type="text" />
     <br />
     <button @click="getPersonalInformation()" type="button">Click me</button>
+    <br />
+    <InputComponent :type="type" />
+    <br />
+    <button @click="setType('text')" type="button">Set type as Text</button>
+    <button @click="setType('number')" type="button">Set type as Number</button>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-
-@Component
+import InputComponent from "./Input.vue";
+@Component({
+  components: {
+    InputComponent,
+  },
+})
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
   //Model
   firstName = "John";
   lastName = "Doe";
+  type = "text";
   getPersonalInformation(): void {
     console.log(this.firstName + " " + this.lastName);
+  }
+  setType(type: string): void {
+    this.type = type;
   }
 }
 </script>
